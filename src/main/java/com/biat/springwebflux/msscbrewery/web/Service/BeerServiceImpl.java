@@ -4,6 +4,7 @@ import com.biat.springwebflux.msscbrewery.web.model.BeerDto;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
+
 @Service
 public class BeerServiceImpl implements BeerService {
 
@@ -14,5 +15,17 @@ public class BeerServiceImpl implements BeerService {
                 .beerStyle("Pale pe")
 
                 .build();
+    }
+
+    @Override
+    public BeerDto saveBeer(BeerDto beerDto) {
+        return beerDto.builder()
+                .id(UUID.randomUUID())
+                .build();
+    }
+
+    @Override
+    public void updatebeerId(UUID beerId) {
+
     }
 }
