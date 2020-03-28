@@ -6,8 +6,8 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @ToString
+@Builder
 public class CustomerDto {
     private UUID id;
     private String name;
