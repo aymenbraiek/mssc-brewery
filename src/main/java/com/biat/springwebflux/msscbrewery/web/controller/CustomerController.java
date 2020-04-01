@@ -27,12 +27,12 @@ public class CustomerController {
         return new ResponseEntity<>(customerService.getCustomerById(customerId), HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity handlePost(CustomerDto customerDto)
-    {
-      CustomerDto customerDtosave=customerService.saveCustome(customerDto);
-        HttpHeaders httpHeaders=new HttpHeaders();
-        httpHeaders.add("HeaderLocation", customerDto.getId().toString());
-        return new ResponseEntity(httpHeaders,HttpStatus.CREATED);
+    @PostMapping
+    public ResponseEntity handlePost(BeerDto beerDto) {
+        BeerDto beerDtosave = beerService.saveBeer(beerDto);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Location", "/api/v1/beer" + beerDtosave.getId().toString());
+        return new ResponseEntity(httpHeaders, HttpStatus.CREATED);
     }
     @PutMapping("/{customerId}")
     public ResponseEntity handleUpdate(@PathVariable("customerId") UUID customerId , @RequestBody CustomerDto customerDto)

@@ -8,9 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
-@Deprecated
+
 @RestController
 @RequestMapping("/api/v1/beer")
+@Deprecated
 public class BeerController {
 
     private final BeerService beerService;
@@ -24,11 +25,12 @@ public class BeerController {
         return new ResponseEntity<>(beerService.getBeerById(beerId), HttpStatus.OK);
     }
 
+
     @PostMapping
     public ResponseEntity handlePost(BeerDto beerDto) {
         BeerDto beerDtosave = beerService.saveBeer(beerDto);
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("HeaderLocation",  beerDto.getId().toString());
+        httpHeaders.add("Location", "/api/v1/beer" + beerDtosave.getId().toString());
         return new ResponseEntity(httpHeaders, HttpStatus.CREATED);
     }
 
