@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RestController
@@ -25,25 +26,25 @@ public class BeerController {
         return new ResponseEntity<>(beerService.getBeerById(beerId), HttpStatus.OK);
     }
 
-
+    /* Create new Beer */
     @PostMapping
-    public ResponseEntity handlePost(BeerDto beerDto) {
+    public ResponseEntity handlePost(@RequestBody @Valid BeerDto beerDto) {
         BeerDto beerDtosave = beerService.saveBeer(beerDto);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Location", "/api/v1/beer" + beerDtosave.getId().toString());
         return new ResponseEntity(httpHeaders, HttpStatus.CREATED);
     }
 
+    /* Update beer */
     @PutMapping("/{beerId}")
-    public ResponseEntity handleUpdate(@PathVariable("beerId") UUID beerId, @RequestBody BeerDto beerDto) {
-        beerService.updatebeerId(beerId,beerDto);
+    public ResponseEntity handleUpdate(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDto beerDto) {
+        beerService.updatebeerId(beerId, beerDto);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{beerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void handleDelete(@PathVariable("beerId") UUID beerId)
-    {
+    public void handleDelete(@PathVariable("beerId") UUID beerId) {
         beerService.deleteByid(beerId);
     }
 }
