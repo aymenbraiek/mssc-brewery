@@ -3,6 +3,7 @@ package com.biat.springwebflux.msscbrewery.domain;
 import com.biat.springwebflux.msscbrewery.web.model.v2.BeerDtoEnum;
 import lombok.*;
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @Data
@@ -15,4 +16,6 @@ public class Beer {
     private String beerName;
     private BeerDtoEnum beerStyle;
     private Long ubc;
+    private Timestamp createdDate;
+    private Timestamp lastUpdatedDate;
 }
