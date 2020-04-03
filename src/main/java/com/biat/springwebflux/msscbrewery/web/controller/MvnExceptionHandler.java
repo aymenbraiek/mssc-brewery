@@ -22,6 +22,7 @@ public class MvnExceptionHandler {
     }
     public ResponseEntity<List> handleBinException(BindException ex)
     {
-        new ResponseEntity<>(ex.getAllErrors());
+        return new ResponseEntity(ex.getAllErrors(), HttpStatus.BAD_REQUEST);
+
     }
 }
